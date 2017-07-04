@@ -53,6 +53,18 @@ func TestNext(t *testing.T) {
 	}
 }
 
+func TestNext2(t *testing.T) {
+	result, ok := Next("arg-six")
+
+	if ok {
+		t.Error("expected Next() to be false")
+	}
+
+	if result != "" {
+		t.Error("expected there to be no next value")
+	}
+}
+
 func TestValueOf(t *testing.T) {
 	value, ok := ValueOf("arg3")
 

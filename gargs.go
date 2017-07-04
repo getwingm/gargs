@@ -33,7 +33,7 @@ func Follows(val string, following string) bool {
 // returns arg next to "val"
 func Next(val string) (string, bool) {
 	if contains, index := Contains(val); contains {
-		if index+1 > len(Args) {
+		if index+1 >= len(Args) {
 			return "", false
 		} else {
 			return Args[index+1], true
