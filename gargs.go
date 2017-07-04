@@ -3,6 +3,7 @@ package gargs
 import (
 	"os"
 	"strings"
+	"sort"
 )
 
 var Args []string
@@ -70,6 +71,7 @@ func Flag(val string) (exists bool, flagType FlagType) {
 
 func init() {
 	copy(Args, os.Args[1:])
+	sort.Strings(Args)
 	parseArgKeys()
 }
 
