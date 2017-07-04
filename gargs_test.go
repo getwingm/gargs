@@ -1,8 +1,8 @@
 package gargs
 
 import (
-	"testing"
 	"os"
+	"testing"
 )
 
 func TestContains(t *testing.T) {
@@ -66,7 +66,7 @@ func TestValueOf(t *testing.T) {
 }
 
 func TestFlag(t *testing.T) {
-	isFlag, flagType := Flag("arg4");
+	isFlag, flagType := Flag("arg4")
 
 	if !isFlag {
 		t.Error("expected arg4 to be flag", isFlag)
@@ -78,7 +78,7 @@ func TestFlag(t *testing.T) {
 }
 
 func TestFlag2(t *testing.T) {
-	isFlag, flagType := Flag("arg5");
+	isFlag, flagType := Flag("arg5")
 
 	if !isFlag {
 		t.Error("expected arg5 to be flag", isFlag)
@@ -90,7 +90,7 @@ func TestFlag2(t *testing.T) {
 }
 
 func TestFlag3(t *testing.T) {
-	isFlag, flagType := Flag("arg2");
+	isFlag, flagType := Flag("arg2")
 
 	if isFlag {
 		t.Error("expected arg2 to not be a flag")
@@ -102,7 +102,7 @@ func TestFlag3(t *testing.T) {
 }
 
 func TestFlag4(t *testing.T) {
-	isFlag, flagType := Flag("arg77");
+	isFlag, flagType := Flag("arg77")
 
 	if isFlag {
 		t.Error("expected arg77 to not be a flag")
