@@ -2,8 +2,8 @@ package gargs
 
 import (
 	"os"
-	"strings"
 	"sort"
+	"strings"
 )
 
 var Args []string
@@ -24,7 +24,7 @@ func Contains(val string) (bool, int) {
 // returns whether or not arg next to "val" is equal to "following"
 func Follows(val string, following string) bool {
 	if contains, index := Contains(val); contains {
-		return Args[index + 1] == following
+		return Args[index+1] == following
 	} else {
 		return false
 	}
@@ -33,7 +33,11 @@ func Follows(val string, following string) bool {
 // returns arg next to "val"
 func Next(val string) (string, bool) {
 	if contains, index := Contains(val); contains {
-		return Args[index + 1], true
+		if index+1 > len(Args) {
+			return "", false
+		} else {
+			return Args[index+1], true
+		}
 	} else {
 		return "", false
 	}
@@ -51,8 +55,8 @@ func ValueOf(val string) (string, bool) {
 type FlagType int
 
 const (
-	long FlagType = iota // a flag like "--post-data"
-	short // a flag like "-h"
+	long  FlagType = iota // a flag like "--post-data"
+	short                 // a flag like "-h"
 )
 
 func Flag(val string) (exists bool, flagType FlagType) {
