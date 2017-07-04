@@ -8,6 +8,7 @@ import (
 var Args []string
 
 var ArgsMap = make(map[string]string)
+var FlagMap = make(map[string]FlagType)
 
 func Contains(val string) (bool, int) {
 	for i, arg := range Args {
@@ -46,17 +47,81 @@ func ValueOf(val string) (string, bool) {
 	}
 }
 
+type FlagType int
+
+const (
+	long FlagType = iota // a flag like "--post-data"
+	short // a flag like "-h"
+)
+
+func Flag(val string) (exists bool, flagType FlagType) {
+	flagVal, ok := FlagMap[val]
+
+	exists = ok
+
+	if !ok {
+		flagType = -1
+	} else {
+		flagType = flagVal
+	}
+
+	return
+}
+
 func init() {
 	copy(Args, os.Args[1:])
 	parseArgKeys()
 }
 
+func isFlag(val string) (bool, FlagType) {
+	if len(val) > 1 {
+		if val[0] == '-' {
+			if val[1] == '-' {
+				return true, long
+			} else {
+				return true, short
+			}
+		}
+	}
+
+	return false, -1
+}
+
 func parseArgKeys() {
 	for i, arg := range Args {
-		if strings.Contains(arg, "=") {
-			split := strings.Index(arg, "=")
-			Args[i] = arg[0:split]
-			ArgsMap[Args[i]] = arg[split+1:len(arg)]
+		var f FlagType
+		if isFlag, flagType := isFlag(arg); isFlag {
+			if flagType == long {
+				arg = arg[2:]
+			} else {
+				arg = arg[1:]
+			}
+
+			f = flagType
+		} else {
+			f = -1
 		}
+
+		key, value := splitVal(arg)
+
+		if value != "" {
+			Args[i] = key
+			ArgsMap[key] = value
+		}
+
+		if f != -1 {
+			FlagMap[key] = f
+		}
+	}
+}
+
+func splitVal(arg string) (key string, value string) {
+	if strings.Contains(arg, "=") {
+		split := strings.Index(arg, "=")
+		key = arg[0:split]
+		value = arg[split+1:]
+		return
+	} else {
+		return arg, ""
 	}
 }
