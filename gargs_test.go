@@ -81,7 +81,7 @@ func TestFlag(t *testing.T) {
 	isFlag, flagType := Flag("arg4")
 
 	if !isFlag {
-		t.Error("expected arg4 to be flag", isFlag)
+		t.Error("expected arg4 to be flag", isFlag, Args)
 	}
 
 	if flagType != long {
@@ -93,7 +93,7 @@ func TestFlag2(t *testing.T) {
 	isFlag, flagType := Flag("arg5")
 
 	if !isFlag {
-		t.Error("expected arg5 to be flag", isFlag)
+		t.Error("expected arg5 to be flag", isFlag, Args)
 	}
 
 	if flagType != short {

@@ -75,7 +75,6 @@ func Flag(val string) (exists bool, flagType FlagType) {
 func ParseArgs() {
 	Args = make([]string, len(os.Args[1:]))
 	copy(Args, os.Args[1:])
-	//sort.Strings(Args)
 	parseArgKeys()
 }
 
@@ -98,9 +97,9 @@ func parseArgKeys() {
 		var f FlagType
 		if isFlag, flagType := isFlag(arg); isFlag {
 			if flagType == long {
-				arg = arg[2:]
+				Args[i] = arg[2:]
 			} else {
-				arg = arg[1:]
+				Args[i] = arg[1:]
 			}
 
 			f = flagType
@@ -108,7 +107,7 @@ func parseArgKeys() {
 			f = -1
 		}
 
-		key, value := splitVal(arg)
+		key, value := splitVal(Args[i])
 
 		if value != "" {
 			Args[i] = key
