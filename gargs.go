@@ -2,7 +2,6 @@ package gargs
 
 import (
 	"os"
-	"sort"
 	"strings"
 )
 
@@ -73,9 +72,10 @@ func Flag(val string) (exists bool, flagType FlagType) {
 	return
 }
 
-func init() {
+func ParseArgs() {
+	Args = make([]string, len(os.Args[1:]))
 	copy(Args, os.Args[1:])
-	sort.Strings(Args)
+	//sort.Strings(Args)
 	parseArgKeys()
 }
 

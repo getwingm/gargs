@@ -155,6 +155,6 @@ func TestMain(m *testing.M) {
 }
 
 func initialize() {
-	Args = []string{"arg1", "arg2", "arg3=value", "--arg4", "-arg5", "--arg-six=VALUE"}
-	parseArgKeys()
+	os.Args = []string{"cmd", "arg1", "arg2", "arg3=value", "--arg4", "-arg5", "--arg-six=VALUE"}
+	ParseArgs()
 }
