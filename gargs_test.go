@@ -149,6 +149,9 @@ func TestFlagArgMix(t *testing.T) {
 }
 
 func TestMain(m *testing.M) {
+	oldArgs := os.Args
+	defer func() { os.Args = oldArgs }()
+	ParseArgs()
 	initialize()
 	retCode := m.Run()
 	os.Exit(retCode)
