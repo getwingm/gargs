@@ -84,8 +84,8 @@ func TestFlag(t *testing.T) {
 		t.Error("expected arg4 to be flag", isFlag, Args)
 	}
 
-	if flagType != long {
-		t.Error("expected arg4 to be of long flag type", flagType)
+	if flagType != Long {
+		t.Error("expected arg4 to be of Long flag type", flagType)
 	}
 }
 
@@ -96,8 +96,8 @@ func TestFlag2(t *testing.T) {
 		t.Error("expected arg5 to be flag", isFlag, Args)
 	}
 
-	if flagType != short {
-		t.Error("expected arg5 to be of short flag type", flagType)
+	if flagType != Short {
+		t.Error("expected arg5 to be of Short flag type", flagType)
 	}
 }
 
@@ -132,8 +132,8 @@ func TestFlagArgMix(t *testing.T) {
 		t.Error("expected arg-six to be a flag", FlagMap)
 	}
 
-	if flagType != long {
-		t.Error("flag type expected to be long", flagType)
+	if flagType != Long {
+		t.Error("flag type expected to be Long", flagType)
 	}
 
 	value, ok := ValueOf("arg-six")

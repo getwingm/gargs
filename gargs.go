@@ -54,8 +54,8 @@ func ValueOf(val string) (string, bool) {
 type FlagType int
 
 const (
-	long  FlagType = iota // a flag like "--post-data"
-	short                 // a flag like "-h"
+	Long  FlagType = iota // a flag like "--post-data"
+	Short                 // a flag like "-h"
 )
 
 func Flag(val string) (exists bool, flagType FlagType) {
@@ -82,9 +82,9 @@ func isFlag(val string) (bool, FlagType) {
 	if len(val) > 1 {
 		if val[0] == '-' {
 			if val[1] == '-' {
-				return true, long
+				return true, Long
 			} else {
-				return true, short
+				return true, Short
 			}
 		}
 	}
@@ -96,7 +96,7 @@ func parseArgKeys() {
 	for i, arg := range Args {
 		var f FlagType
 		if isFlag, flagType := isFlag(arg); isFlag {
-			if flagType == long {
+			if flagType == Long {
 				Args[i] = arg[2:]
 			} else {
 				Args[i] = arg[1:]
